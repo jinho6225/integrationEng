@@ -12,7 +12,10 @@ class LinkedList {
       this.size = 0; 
   } 
 
-    add(val) { 
+    add(val) {
+      if (val < 0) {
+        val = 0
+      }
       var node = new ListNode(val);     
       var current; 
     

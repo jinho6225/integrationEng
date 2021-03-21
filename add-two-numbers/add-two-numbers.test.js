@@ -4,7 +4,7 @@ const LinkedList = require ('./lib/linkedList')
 const helper = require ('./lib/helper')
 
 
-describe("AddTwoNumbers", function (arr) {
+describe("AddTwoNumbers - it should be passed", function () {
     let linkedList1, linkedList2
 
     beforeEach(function() {
@@ -59,5 +59,49 @@ describe("AddTwoNumbers", function (arr) {
         linkedList2.add(8)
         expect(helper(addTwoNumbers(linkedList1, linkedList2))).to.equal(350);
     });
-  });
-  
+
+    it("#7 [2,4], [8,5] => [0,0,1]", function () {
+        linkedList1.add(2)
+        linkedList1.add(4)
+        linkedList2.add(8)
+        linkedList2.add(5)
+        expect(helper(addTwoNumbers(linkedList1, linkedList2))).to.equal(100);
+    });
+
+    it("#8 [-1], [-1] => [0] - two non-negative integers", function () {
+        linkedList1.add(-1)
+        linkedList2.add(-1)
+        expect(helper(addTwoNumbers(linkedList1, linkedList2))).to.equal(0);
+    });
+});
+
+
+describe("AddTwoNumbers - it should be failed", function () {
+    let linkedList1, linkedList2
+
+    beforeEach(function() {
+        linkedList1 = new LinkedList();
+        linkedList2 = new LinkedList();
+    });
+
+
+    it("#1 [-1], [-1] => [-2] - representing two non-negative integers", function () {
+        linkedList1.add(-1)
+        linkedList2.add(-1)
+        expect(helper(addTwoNumbers(linkedList1, linkedList2))).to.equal(-2);
+    });
+
+    it("#2 [9,9,9], [9,9] => [8,9,0,1] - The digits are stored in reverse order", function () {
+        linkedList1.add(9)
+        linkedList1.add(9)
+        linkedList1.add(9)
+        linkedList2.add(9)
+        linkedList2.add(9)
+        expect(helper(addTwoNumbers(linkedList1, linkedList2))).to.equal(8901);
+    });
+
+    it("#3 [], [] => [] - given two non-empty linked lists", function () {
+        expect(helper(addTwoNumbers(linkedList1, linkedList2))).to.equal(0);
+    });
+
+});

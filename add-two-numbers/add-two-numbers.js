@@ -91,7 +91,7 @@ function ListNode(val, next) {
     this.next = (next===undefined ? null : next)
 }
 
-module.exports = exports = function addTwoNumbers(l1, l2) {
+function addTwoNumbers(l1, l2) {
     if (l1.head.val === 0 && l1.head.next === null && l2.head.val === 0 && l2.head.next === null) return l1.head
     if (l1.head.val === 0 && l1.head.next === null) return l2.head
     if (l2.head.val === 0 && l2.head.next === null) return l1.head
@@ -143,3 +143,5 @@ module.exports = exports = function addTwoNumbers(l1, l2) {
     }
     return cur
 };
+
+module.exports = addTwoNumbers

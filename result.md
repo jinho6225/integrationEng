@@ -83,6 +83,10 @@ Hence, a tester will use this template for an ongoing testing efforts with the d
 
 ## 4a. 
 
+1.  open terminal
+2.  npm i --save-dev
+3.  npm test
+
 ```javascript
 const expect = require('chai').expect
 const addTwoNumbers = require ('./add-two-numbers')
@@ -90,7 +94,7 @@ const LinkedList = require ('./lib/linkedList')
 const helper = require ('./lib/helper')
 
 
-describe("AddTwoNumbers", function (arr) {
+describe("AddTwoNumbers - it should be passed", function () {
     let linkedList1, linkedList2
 
     beforeEach(function() {
@@ -145,8 +149,51 @@ describe("AddTwoNumbers", function (arr) {
         linkedList2.add(8)
         expect(helper(addTwoNumbers(linkedList1, linkedList2))).to.equal(350);
     });
-  });
-  
+
+    it("#7 [2,4], [8,5] => [0,0,1]", function () {
+        linkedList1.add(2)
+        linkedList1.add(4)
+        linkedList2.add(8)
+        linkedList2.add(5)
+        expect(helper(addTwoNumbers(linkedList1, linkedList2))).to.equal(100);
+    });
+
+    it("#8 [-1], [-1] => [0] - two non-negative integers", function () {
+        linkedList1.add(-1)
+        linkedList2.add(-1)
+        expect(helper(addTwoNumbers(linkedList1, linkedList2))).to.equal(0);
+    });
+});
+
+
+describe("AddTwoNumbers - it should be failed", function () {
+    let linkedList1, linkedList2
+
+    beforeEach(function() {
+        linkedList1 = new LinkedList();
+        linkedList2 = new LinkedList();
+    });
+
+
+    it("#1 [-1], [-1] => [-2] - representing two non-negative integers", function () {
+        linkedList1.add(-1)
+        linkedList2.add(-1)
+        expect(helper(addTwoNumbers(linkedList1, linkedList2))).to.equal(-2);
+    });
+
+    it("#2 [9,9,9], [9,9] => [8,9,0,1] - The digits are stored in reverse order", function () {
+        linkedList1.add(9)
+        linkedList1.add(9)
+        linkedList1.add(9)
+        linkedList2.add(9)
+        linkedList2.add(9)
+        expect(helper(addTwoNumbers(linkedList1, linkedList2))).to.equal(8901);
+    });
+
+    it("#3 [], [] => [] - given two non-empty linked lists", function () {
+        expect(helper(addTwoNumbers(linkedList1, linkedList2))).to.equal(0);
+    });
+});
 
 ```
 
@@ -155,6 +202,51 @@ describe("AddTwoNumbers", function (arr) {
 <br/>
 
 ## 4b. 
+
+1.  open terminal
+2.   python ./reverse-string/test.py 
+
+```python
+import unittest
+from reverse_string import Solution
+
+class Test(unittest.TestCase):
+
+    """pass case"""
+    def test_1(self):
+        self.assertEqual(Solution.reverseParentheses(self, "ta()usw((((a))))"), 'tauswa')
+
+    def test_2(self):
+        self.assertEqual(Solution.reverseParentheses(self, "(abcd)"), 'dcba')
+
+    def test_3(self):
+        self.assertEqual(Solution.reverseParentheses(self, "(u(love)i)"), "iloveu")
+
+    def test_4(self):
+        self.assertEqual(Solution.reverseParentheses(self, "(ed(et(oc))el)"), 'leetcode')
+
+    def test_5(self):
+        self.assertEqual(Solution.reverseParentheses(self, "a(bcdefghijkl(mno)p)q"), 'apmnolkjihgfedcbq')
+
+    def test_6(self):
+        self.assertNotEqual(Solution.reverseParentheses(self, "(u(love)i)"), 'ievolu')
+
+    def test_7(self):
+        self.assertNotEqual(Solution.reverseParentheses(self, "(ed(et(oc))el)"), 'edetocel')
+
+    """fail case"""
+    """square bracket"""
+    def test_8(self):
+        self.assertEqual(Solution.reverseParentheses(self, "(u[love]i)"), 'iloveu')
+    """not pair of matching parentheses"""
+    def test_9(self):
+        self.assertEqual(Solution.reverseParentheses(self, "(ed(et((oc))el)"), 'leetcode')
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+```
 
 <br/>
 <hr/>

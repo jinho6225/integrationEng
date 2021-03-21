@@ -1,5 +1,4 @@
-module.exports = exports = function helper(linkedList) {
-    console.log(linkedList, 'here')
+function helper(linkedList) {
     let result = []
     if (linkedList.next === null) {
         result.push(String(linkedList.val))
@@ -12,3 +11,5 @@ module.exports = exports = function helper(linkedList) {
         return Number(result.reverse().join(''))
     }
 }
+
+module.exports = helper
