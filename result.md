@@ -1,20 +1,17 @@
 
-# < TECHNICAL >
+## 1. Add Two Numbers (no action, solved last time just placed here for reference)
 
-# === Ruby ===
+<br/>
+<hr/>
+<br/>
 
+## 2. Reverse string (no action, solved last time just placed here for reference)
 
-# === Node.js, Vue.js===
-## 1. 
+<br/>
+<hr/>
+<br/>
 
-# === AWS ===
-
-# === Python ===
-## 2. 
-
-# === Test Development ===
 ## 3. 
-
 
 3. Imagine a system that consists of a server and a client, which are connected over the network.   
 The client sends a request, the server processes the request and sends back a response, 
@@ -29,37 +26,83 @@ Format:
 1-3. Test Steps 
 1-4. Comments 
 
-- 2-1 리스트 생성하는 웹 어플리케이션이지? 이것의 Block diagram 을 그려봐 줄래? 단순히 client - server 가 아니고, 프로세서 개념으로 그려 봐줄래? 
-  (참고로 processor 는 어떤 프로그램 일 수도 있고, object 가 만들어져서 프로그램 안에서 돌아가는 thread 일 수도 있어. 가령, input 은 어떤 함수가 받고, 그것을 클릭하면 어떤 프로세서가 이 event 를 듣고, 
-   서버에서는 어떤 프로세서 (혹은 이 프로세서 안에 있는 어떤 함수?) 가 request 를 받으며, 디스플레이는 누가 맡고 있는지. 또한 add, delete  할때 flow 가 어떻게 일어나는지  diagram 을 그려보라는 뜻) 
+![Client - Server](./client_server.png)
 
-- 2-2 위에 그린 diagram 을 기반으로 테스트 플랜을 짜줄 수 있어? 
-  (참고로 테스트 플랜을 말할때는 처음에는 manual test 를 말해. 그렇게 하고 나서 자동화 시키는 것이 (CI/CD 에서 돌아가도록) automation 이지) 
-예를 들면, 이렇게 하는 것을 말해. 
+> Client
 
-client ----- server  이런 그림이 있다고 할때, 테스트 플랜을 다음과 같이 짜볼 수 있겠지. (밑에 예는 동서가 만든 엡과는 관련이 없고, 예시를 들기 위한 것 뿐, 하지만 test name, test steps 은 동일 하게 적용이 되. 
-그러니 숙제를 할때, 이 두가지 항목은 지키되, 테스트 스텝에 관해서는 동서가 2-1 답변을 어떻게 하느냐에 따라 달려있겠지?)
+        A. Test Case name: Test Client Network Connection
+        B. Test Scope: Client Side
+        C. Test Steps:
+            1. Open terminal on client
+            2. Check network connection status between client and server
+            3. `ping -c 4 jsonplaceholder.typicode.com`
+        D. Comment: Verify ping test passes for the server
 
-Test 1 name: Test client connection 
-Test steps: 
-1) Open terminal on client 
-2) Execute the following command:
-$ ping <server name> -c 4 
-3) Verify ping test passes for the server 
 
-Test 2 name: Test an existing URI on server 
-Test steps: 
-1) Open terminal on client 
-2) Execute the following command: 
-curl -X get <server name>/URI/PATH 
-3) Verify the GET command returns positive   
+        A. Test Case name: Test all browser works same
+        B. Test Scope: Client Side
+        C. Test Steps:
+            1. Open all browser
+            2. Open development tool and move to Network tab
+            3. Click the button which can send a request to server and check Network tab
+        D. Comment: Verify browser send the request to server when user click the button
 
-Test 3 name: Test a bad URI on server
-Test steps: 
-1) Open terminal on client 
-2) Execute the following command: 
-curl -X get <server name>/non-existing/URI/PATH 
-3) Verify that the server returns an error code (e.g. 404) in a proper way 
+
+        A. Test Case name: Test an existing URI on server
+        B. Test Scope: Client Side
+        C. Test Steps:
+            1. Open terminal on client
+            2. Send GET request to URI
+            3. `curl -i https://jsonplaceholder.typicode.com/todos/100`
+        D. Comment: Verify the GET command returns 2xx status code
+
+
+
+
+> Server
+
+        A. Test Case name: Test Server response Incorrectly
+        B. Test Scope: Server Side
+        C. Test Steps:
+            1. Add code on server side which occur err
+            2. Open terminal on client
+            3. Send POST request to server with proper data form
+            4. `curl -I -d '{"title":"foo", "body":"bar", "userId":"1"}' -H 'Content-Type: application/json'   https://jsonplaceholder.typicode.com/posts`
+        D. Comment: Verify that the server returns 5xx status code despite client send a request correctly
+
+
+
+
+
+> Client - Server
+
+        A. Test Case name: Test Client send a GET request correctly
+        B. Test Scope: Client and Server Side (Integration)
+        C. Test Steps:
+            1. Open terminal on client
+            2. Send GET request to server correctly
+            3. `curl -i https://jsonplaceholder.typicode.com/todos/10`
+        D. Comment: Verify the GET command received expected data from server
+
+
+    	A. Test Case name: Test Client send a GET request Incorrectly
+    	B. Test Scope: Client and Server Side (Integration)
+        C. Test Steps:
+            1. Open terminal on client
+            2. Send GET request to server Incorrectly
+            3. `curl -i https://jsonplaceholder.typicode.com/todos/1000`
+        D. Comment: Verify that the server returns an error code (e.g. 4xx)
+
+
+        A. Test Case name: Test Client send a POST request correctly
+        B. Test Scope: Client and Server Side (Integration)
+        C. Test Steps:
+            1. Open terminal on client
+            2. `curl -I -d '{"title":"foo", "body":"bar", "userId":"1"}' -H 'Content-Type: application/json'   https://jsonplaceholder.typicode.com/posts`
+        D. Comment: Verify that the server returns what Client sent the data to server(expected data) with 201 status code
+
+
+       
 
 
 <br/>
@@ -73,13 +116,21 @@ For instance, this template is for a repeated testing practice which may include
 It may also include some troubleshooting guidelines based on the test suite developed above. 
 Hence, a tester will use this template for an ongoing testing efforts with the diagram mentioned in question 1. 
 
+| Testing Template |  |
+| ---| --- |
+| Created By |  |
+| Reviewd By |  |
+| Priority |  |
+| Title |  |
+| Description |  |
+
+| TCID | Test Step | Test Date | Expected Result | Actual Result | Execution Details (pass/fail/blocked/Onhold | Commnets |
+| :--: | :--: | :--: | :--: | :--: | :--: | :--: |
 
 <br/>
 <hr/>
 <br/>
 
-# < NON-TECHNICAL >
-# === Test Artifact Management ===
 
 ## 4a. 
 
@@ -260,17 +311,20 @@ if __name__ == "__main__":
 
 ## 6. 
 
+    Chrome DevTools, Istanbul by jest for code coverage, MOCHA, JEST, PUPPETEER
+
 <br/>
 <hr/>
 <br/>
 
 ## 7. 
 
+    JavaScript
+
 <br/>
 <hr/>
 <br/>
 
-# Concept Questions
 
 ## 8. 
 
