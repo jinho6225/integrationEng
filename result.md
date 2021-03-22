@@ -58,7 +58,6 @@ Format:
 
 
 
-
 > Server
 
         A. Test Case name: Test Server response Incorrectly
@@ -71,6 +70,43 @@ Format:
         D. Comment: Verify that the server returns 5xx status code despite client send a request correctly
 
 
+        A. Test Case name: Test Server How many requests handle at a time
+        B. Test Scope: Server Side
+        C. Test Steps:
+            1. Install some tool which help us to test for server  like JMeter
+            2. Open terminal on server
+            3. Execute htop (if not exist, install htop) in order to check server resource status (cpu, memory, etc..)
+            4. Using JMeter, send request
+            5. Check the load time (from request start to response start)
+            6. Adjust number of virtual client (Number of thread, Loop count)
+            7. Increase number of virtual client to test maximum load as well as normal load expected
+            8. record procedure and figure out the point of minimum expense (maximum capacity for cpu, memory, etc..)
+        D. Comment: Verify that the server can handle how many clients without any overload
+
+
+        A. Test Case name: Test logic of data process on server work well
+        B. Test Scope: Server Side
+        C. Test Steps:
+            1. Install some tool which help us to test for server  like JMeter
+            2. Install some tools for application and infrastructure (resources) monitoring
+            3. Using JMeter, send request
+            4. Adjust number of virtual client (Number of thread, Loop count)
+            5. Increase number of virtual client to test maximum load as well as normal load expected for application and infrastructure (resources)
+            6. record procedure and figure out the capacity of each infrastructure
+        D. Comment: Verify that the application and infrastructure can handle how many clients without any overload
+
+
+        A. Test Case name: Test Server with overload
+        B. Test Scope: Server Side
+        C. Test Steps:
+            1. Install some tool which help us to test for server  like JMeter
+            2. Open terminal on server
+            3. Execute htop (if not exist, install htop) in order to check server resource status (cpu, memory, etc..)
+            4. Using JMeter, send request
+            5. Check the load time (from request start to response start)
+            6. Adjust number of virtual client (Number of thread, Loop count)
+            7. Increase number of virtual client. when it's overload, stop increasing number of virtual client and run server to check for stress test
+        D. Comment: Verify that the server need to be extended when it needed
 
 
 
@@ -102,8 +138,6 @@ Format:
         D. Comment: Verify that the server returns what Client sent the data to server(expected data) with 201 status code
 
 
-       
-
 
 <br/>
 <hr/>
@@ -125,7 +159,12 @@ Hence, a tester will use this template for an ongoing testing efforts with the d
 | Description |  |
 
 | TCID | Test Step | Test Date | Expected Result | Actual Result | Execution Details (pass/fail/blocked/Onhold | Commnets |
-| :--: | :--: | :--: | :--: | :--: | :--: | :--: |
+| :--: | :-- | :--: | :--: | :--: | :--: | :--: |
+| TU01 | 1. Open terminal on client<br/> 2. Open development tool and move to Network tab <br/> 3. `ping -c 4 jsonplaceholder.typicode.com` | 3/21/21 | 4 lines ping results | 4 lines ping results |  | Verify ping test passes for the server |
+| TU02 | 1. Open all browser<br/> 2. Open development tool and move to Network tab<br/> 3. Click the button which can send a request to server and check Network tab | 3/21/21 | response from network tab | response from network tab | | Verify browser send the request to server when user click the button |
+| TU03 | 1. Open terminal on client<br/> 2. Send GET request to URI<br/> 3. `curl -i https://jsonplaceholder.typicode.com/todos/100` | 3/21/21 | status code 2xx | status code 2xx | | Verify the GET command returns 2xx status code |
+
+
 
 <br/>
 <hr/>
