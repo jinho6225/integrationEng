@@ -344,6 +344,26 @@ if __name__ == "__main__":
 
 ## 5. 
 
+![testEnv](./testEnv.png)
+
+    - reference documents / configuration guides / user manuals / regular testing template
+    - network
+    - creating test data for the test enviornment
+    - need a monitoring tools for watching application and infra (cpu, network, memory, databases, storage)
+
+    client (vue.js)
+    - FrontEnd running enviornment
+    - client operating system
+
+    server (node.js) - test server
+    - Hardware includes server operating system
+    - every test may not be executed on a local machine
+    - it may need establishing a test server, which can support applications
+
+    
+
+
+
 <br/>
 <hr/>
 <br/>
